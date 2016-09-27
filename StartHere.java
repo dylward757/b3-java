@@ -1,41 +1,57 @@
-package loopWhileAssignment;
-
-import javax.swing.JOptionPane;
 
 public class StartHere {
-
+		/*
+		 * Caesar Cipher - the first known cryptography
+		 * to code:
+		 * 
+		 * 1. determine a key -- an int used to offset letters in the alphabet
+		 * 2. take each char in your plain text msg, add the offset key to get the coded message
+		 * for example key = 2 plain text is 'abc' then coded message is 'cdf'
+		 * to decode the msg subtract 2 from the coded message
+		 * 
+		 * 
+		 * Q1 how do we deal with spaces? hint: use an if test for spaces
+		 * Q2 how do we wrap at the end of the alphabet?
+		 * Q2 hint: consider an if statement that > 25 then subtract 25
+		 * example z + 2 is 25 + 2 = 28 crash
+		 * so if (>26) do result - 25 that is 28 - 25 = 2 = b
+		 */
 	public static void main(String[] args) {
 		
-		/*
-		 * graded
-		 * JOPed and JARed -- no syso
-		 * using a JOP ask the user to enter a number (int)
-		 * test if it is even or odd
-		 * tell the user "your number is even" or "your number is odd"
-		 * ask "would you like to go again (y or n)"
-		 * if no, "thanks, goodbye"
-		 * if yes loop again to ask for another number
-		 */
+		String alpha = " abcdefghijklmnopqrstuvwxyz0123456789";
 		
-		String i = "";
-		String yn = "yes";
-		int mod = 0;
-		int result = 0;
+		int key = 2;
+		String plainTxt = "I love Zebras78";
+		String codedTxt = "";
 		
-		while (yn.equals("yes")){
-			i = JOptionPane.showInputDialog(null, "Please enter a whole number");
-			mod = Integer.parseInt(i);
-			result = mod % 2;
-			if (result == 1){
-				JOptionPane.showMessageDialog(null, "Your number is odd");
-			}
-			else if (result == 0){
-				JOptionPane.showMessageDialog(null, "Your number is even");
+		char shiftedAlpha = ' ';
+		int alphaIndex = 0;
+		
+		plainTxt = plainTxt.toLowerCase();
+		//System.out.println(plainTxt);
+		
+		//test shift the first char by the key amount
+		//i shifted by 2 should be the key
+		
+		for (int i = 0; i < plainTxt.length(); i++){
+			//System.out.println("First letter of " + plainTxt + " is " + plainTxt.charAt(i));
+			//System.out.println("Alpha index of above is " + alpha.indexOf(i)); //should be 8
+			alphaIndex = alpha.indexOf(plainTxt.charAt(i));
+			if (alphaIndex > 36){
+				shiftedAlpha = alpha.charAt(alphaIndex - 36);
 			}
 			else{
-				JOptionPane.showMessageDialog(null, "Please enter a valid number");
+				shiftedAlpha = alpha.charAt(alphaIndex + key);
 			}
-			yn = JOptionPane.showInputDialog("Would you like to choose another number?(yes or no)");
-		}
-	}
-}
+			//System.out.println("Shifted alpha is " + shiftedAlpha);
+			codedTxt = codedTxt + shiftedAlpha;	
+		}//end of coding sequence
+		
+		System.out.println("Plain text message was: " + plainTxt);
+		System.out.println("Using this key: " + key);
+		System.out.println("Results in this coded text: " + codedTxt);
+		
+		
+	}//end of main
+
+}//end of class
