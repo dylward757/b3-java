@@ -31,18 +31,16 @@ public class StartHere {
 		//System.out.println(plainTxt);
 		
 		//test shift the first char by the key amount
-		//i shifted by 2 should be the key
+		//i shifted by 2 should be the key\
+		if (key<0){
+			key = 36 -(-key%36);
+			}
 		
 		for (int i = 0; i < plainTxt.length(); i++){
 			//System.out.println("First letter of " + plainTxt + " is " + plainTxt.charAt(i));
 			//System.out.println("Alpha index of above is " + alpha.indexOf(i)); //should be 8
 			alphaIndex = alpha.indexOf(plainTxt.charAt(i));
-			if (alphaIndex > 36){
-				shiftedAlpha = alpha.charAt(alphaIndex - 36);
-			}
-			else{
-				shiftedAlpha = alpha.charAt(alphaIndex + key);
-			}
+			
 			//System.out.println("Shifted alpha is " + shiftedAlpha);
 			codedTxt = codedTxt + shiftedAlpha;	
 		}//end of coding sequence
